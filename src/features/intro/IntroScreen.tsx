@@ -96,6 +96,7 @@ export function IntroScreen() {
 
   if (phase === 'dialogue-1') {
     const current = INTRO_DIALOGUE[dialogueIdx]
+    if (!current) return null
     return (
       <div className={styles.container}>
         <div className={styles.dialogueArea}>

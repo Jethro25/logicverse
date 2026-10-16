@@ -174,7 +174,7 @@ export function BitDialogue({ mood = 'happy', lines, onDone, onSkip, textSpeed =
           <span className={styles.lineCount}>{lineIdx + 1} / {lines.length}</span>
           <div className={styles.dialogueActions}>
             {onSkip && <button className={styles.skipBtn} onClick={e => { e.stopPropagation(); onSkip() }}>Skip</button>}
-            <button className={styles.nextBtn} onClick={advance}>
+            <button className={styles.nextBtn} onClick={e => { e.stopPropagation(); advance() }}>
               {lineIdx < lines.length - 1 ? 'Next →' : done ? 'Continue' : '...'}
             </button>
           </div>
