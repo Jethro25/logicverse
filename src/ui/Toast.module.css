@@ -1,0 +1,30 @@
+.container {
+  position: fixed;
+  bottom: var(--space-6);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  border: none;
+  cursor: pointer;
+  animation: slide-in-up var(--transition-base) ease forwards;
+  box-shadow: var(--shadow-lg);
+}
+
+.info { background: var(--color-info); color: #fff; }
+.success { background: var(--color-success); color: #fff; }
+.achievement { background: linear-gradient(135deg, #f59e0b, #a855f7); color: #fff; }
+.error { background: var(--color-error); color: #fff; }

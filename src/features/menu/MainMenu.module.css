@@ -1,0 +1,136 @@
+.container {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-4);
+  gap: var(--space-6);
+}
+
+/* Logo */
+.logo {
+  position: relative;
+  text-align: center;
+  animation: slide-in-up 0.6s ease forwards;
+}
+
+.logoGlow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(ellipse, var(--color-accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  position: relative;
+}
+
+.logoL { color: var(--color-accent); text-shadow: 0 0 30px var(--color-accent); }
+.logoOGIC { color: var(--color-text-heading); }
+.logoVerse {
+  display: block;
+  font-size: var(--text-3xl);
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, var(--color-accent), #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.logoSub {
+  font-size: var(--text-sm);
+  color: var(--color-text-3);
+  letter-spacing: 0.1em;
+  margin-top: var(--space-2);
+  text-transform: uppercase;
+}
+
+/* Bit */
+.bitContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  animation: fade-in 0.8s ease 0.2s both;
+}
+
+.greeting {
+  font-size: var(--text-sm);
+  color: var(--color-text-2);
+}
+.greeting strong { color: var(--color-accent); }
+
+/* Nav */
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 320px;
+}
+
+.menuBtn {
+  width: 100%;
+  animation: slide-in-up 0.5s ease both;
+}
+
+/* XP */
+.levelBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  padding: var(--space-2) var(--space-4);
+  animation: fade-in 1s ease 0.5s both;
+}
+
+.levelLabel {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+}
+
+.xpBar {
+  width: 80px;
+  height: 6px;
+  background: var(--color-bg-3);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.xpFill {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+}
+
+.xpLabel {
+  font-size: var(--text-xs);
+  color: var(--color-text-3);
+}
+
+.tagline {
+  font-size: var(--text-xs);
+  color: var(--color-text-3);
+  letter-spacing: 0.05em;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .logoText { font-size: var(--text-4xl); }
+  .logoVerse { font-size: var(--text-2xl); }
+}

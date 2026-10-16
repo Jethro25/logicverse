@@ -1,0 +1,235 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--color-bg);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-bg-2);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.backBtn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-2);
+  font-size: var(--text-lg);
+  padding: var(--space-1) var(--space-2);
+  cursor: pointer;
+  transition: background 0.12s;
+  flex-shrink: 0;
+}
+.backBtn:hover { background: var(--color-bg) }
+
+.headerInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+  min-width: 0;
+}
+
+.lessonIcon { font-size: var(--text-xl) }
+
+.lessonTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pageCount {
+  font-size: var(--text-sm);
+  color: var(--color-text-3);
+  white-space: nowrap;
+}
+
+.progressBar {
+  height: 3px;
+  background: var(--color-bg-2);
+  flex-shrink: 0;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-8) var(--space-6);
+  max-width: 760px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Text page */
+.textPage, .examplePage, .diagramPage, .ttPage { display: flex; flex-direction: column; gap: var(--space-4) }
+
+.pageHeading {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.pageBody {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--color-text-2);
+}
+
+.inlineCode {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  background: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg-2));
+  color: var(--color-accent);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Example page */
+.exampleDesc {
+  font-size: var(--text-base);
+  color: var(--color-text-2);
+  font-style: italic;
+  margin: 0;
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-left: var(--space-6);
+}
+
+.stepItem {
+  font-size: var(--text-base);
+  color: var(--color-text-2);
+  line-height: 1.6;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+/* Diagram page */
+.diagramWrap {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.explanation, .caption {
+  font-size: var(--text-sm);
+  color: var(--color-text-3);
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Truth table demo */
+.ttWrap { overflow-x: auto }
+
+.ttTable {
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+}
+
+.ttTable th,
+.ttTable td {
+  padding: var(--space-2) var(--space-4);
+  text-align: center;
+  border: 1px solid var(--color-border);
+  min-width: 60px;
+}
+
+.ttInputHead { background: var(--color-bg-2); color: var(--color-text-2); font-weight: 700 }
+.ttOutputHead { background: color-mix(in srgb, var(--color-accent) 12%, var(--color-bg-2)); color: var(--color-accent); font-weight: 700 }
+.ttInputCell { background: var(--color-bg); color: var(--color-text-2) }
+.ttOutputCell { background: var(--color-bg-2); color: var(--color-text); font-weight: 700 }
+
+.ttRow { cursor: pointer; transition: background 0.1s }
+.ttRow:hover td { background: color-mix(in srgb, var(--color-accent) 6%, var(--color-bg)) }
+.ttRowHighlight td { background: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg)) !important; color: var(--color-accent) }
+
+/* Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-bg-2);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+  gap: var(--space-3);
+}
+
+.prevBtn, .nextBtn {
+  padding: var(--space-2) var(--space-5);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-2);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  min-width: 80px;
+}
+.prevBtn:hover:not(:disabled) { background: var(--color-bg); border-color: var(--color-text-3) }
+.prevBtn:disabled { opacity: 0.3; cursor: not-allowed }
+.nextBtn:hover { background: var(--color-bg); border-color: var(--color-accent); color: var(--color-accent) }
+
+.completeBtn {
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-full);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.12s;
+}
+.completeBtn:hover { opacity: 0.85 }
+
+.dots {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-border);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.15s, transform 0.15s;
+}
+.dotActive { background: var(--color-accent); transform: scale(1.3) }
+.dotDone { background: color-mix(in srgb, var(--color-accent) 50%, var(--color-border)) }
+
+.error {
+  padding: var(--space-8);
+  text-align: center;
+  color: var(--color-text-3);
+}

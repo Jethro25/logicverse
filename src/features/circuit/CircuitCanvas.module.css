@@ -1,0 +1,11 @@
+.canvas {
+  background: var(--color-bg-2);
+  border-radius: var(--radius-lg);
+  display: block;
+  user-select: none;
+  touch-action: none;
+}
+
+.grid { pointer-events: none; }
+.wires {}
+.components {}
