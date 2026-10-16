@@ -1,136 +1,360 @@
-.container {
+/* ── Root ─────────────────────────────────────────────────────────────────── */
+.root {
   position: relative;
-  z-index: 1;
+  width: 100%;
   height: 100%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-8) var(--space-4);
-  gap: var(--space-6);
+  overflow: hidden;
+  background: #080e1c;
+  color: #e2e8f0;
+  font-family: Inter, system-ui, sans-serif;
 }
 
-/* Logo */
-.logo {
-  position: relative;
-  text-align: center;
-  animation: slide-in-up 0.6s ease forwards;
-}
-
-.logoGlow {
+/* ── Starfield ────────────────────────────────────────────────────────────── */
+.stars1 {
   position: absolute;
-  inset: -30px;
-  background: radial-gradient(ellipse, var(--color-accent-glow) 0%, transparent 70%);
+  inset: -40px;
+  background-image:
+    radial-gradient(1px 1px at 23px 41px, #e2e8f0, transparent),
+    radial-gradient(1px 1px at 141px 97px, #94a3b8, transparent),
+    radial-gradient(1.5px 1.5px at 77px 183px, #f8fafc, transparent),
+    radial-gradient(1px 1px at 201px 12px, #cbd5e1, transparent),
+    radial-gradient(1px 1px at 172px 222px, #64748b, transparent);
+  background-size: 240px 240px;
+  transition: transform .4s ease-out;
   pointer-events: none;
 }
 
-.logoText {
-  font-family: var(--font-display);
-  font-size: var(--text-5xl);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  position: relative;
+.stars2 {
+  position: absolute;
+  inset: -40px;
+  background-image:
+    radial-gradient(1.5px 1.5px at 60px 120px, #f8fafc, transparent),
+    radial-gradient(1px 1px at 250px 40px, #e2e8f0, transparent),
+    radial-gradient(2px 2px at 180px 260px, #a5f3fc, transparent);
+  background-size: 310px 310px;
+  animation: lvTwinkle 5s ease-in-out infinite;
+  transition: transform .4s ease-out;
+  pointer-events: none;
 }
 
-.logoL { color: var(--color-accent); text-shadow: 0 0 30px var(--color-accent); }
-.logoOGIC { color: var(--color-text-heading); }
+/* ── Radial glow ──────────────────────────────────────────────────────────── */
+.radialGlow {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 760px;
+  height: 760px;
+  margin: -380px 0 0 -380px;
+  background: radial-gradient(circle, rgba(0,212,255,.16), rgba(168,85,247,.08) 40%, transparent 66%);
+  pointer-events: none;
+  transition: transform .5s ease-out;
+}
+
+/* ── Animated traces ──────────────────────────────────────────────────────── */
+.trace1 {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 58px;
+  height: 1px;
+  background: rgba(0,212,255,.14);
+  overflow: hidden;
+  pointer-events: none;
+}
+.trace2 {
+  position: absolute;
+  left: 0; right: 0;
+  top: 92px;
+  height: 1px;
+  background: rgba(168,85,247,.12);
+  overflow: hidden;
+  pointer-events: none;
+}
+.traceBeam {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+  animation: lvTrace 5s linear infinite;
+}
+.traceBeam2 {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #a855f7, transparent);
+  animation: lvTrace 7s 2s linear infinite;
+}
+
+/* ── Mute button ──────────────────────────────────────────────────────────── */
+.muteBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 30;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background: rgba(15,23,42,.62);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(148,163,184,.2);
+  color: #e2e8f0;
+  font: 700 17px 'JetBrains Mono', monospace;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────────── */
+.layout {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 64px 22px 28px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'logo' 'bit' 'btns';
+  align-content: center;
+  justify-items: center;
+  gap: 14px;
+}
+
+@media (min-width: 700px) {
+  .layout {
+    padding: 56px 96px;
+    grid-template-columns: 1.15fr 1fr;
+    grid-template-areas: 'logo bit' 'btns bit';
+    justify-items: start;
+    gap: 36px 64px;
+  }
+}
+
+/* ── Logo ─────────────────────────────────────────────────────────────────── */
+.logo {
+  grid-area: logo;
+  text-align: center;
+  animation: lvUp .6s ease-out both;
+}
+
+@media (min-width: 700px) {
+  .logo { text-align: left; }
+}
+
+.logoTitle {
+  font-family: Nunito, sans-serif;
+  font-weight: 900;
+  font-size: 54px;
+  line-height: .95;
+  letter-spacing: .02em;
+}
+
+.logoL {
+  color: #00d4ff;
+  text-shadow: 0 0 18px rgba(0,212,255,.85), 0 0 46px rgba(0,212,255,.4);
+}
+.logoOGIC { color: #f8fafc; }
+
 .logoVerse {
-  display: block;
-  font-size: var(--text-3xl);
-  letter-spacing: 0.15em;
-  background: linear-gradient(135deg, var(--color-accent), #a855f7);
+  font-family: Nunito, sans-serif;
+  font-weight: 900;
+  font-size: 54px;
+  line-height: .95;
+  letter-spacing: .3em;
+  background: linear-gradient(90deg, #00d4ff, #a855f7 55%, #ec4899);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
 .logoSub {
-  font-size: var(--text-sm);
-  color: var(--color-text-3);
-  letter-spacing: 0.1em;
-  margin-top: var(--space-2);
-  text-transform: uppercase;
+  margin-top: 14px;
+  font: 600 12px 'JetBrains Mono', monospace;
+  letter-spacing: .24em;
+  color: #94a3b8;
 }
 
-/* Bit */
-.bitContainer {
+@media (min-width: 700px) {
+  .logoTitle, .logoVerse { font-size: 96px; }
+  .logoVerse { letter-spacing: .36em; }
+}
+
+/* ── BIT ──────────────────────────────────────────────────────────────────── */
+.bitCol {
+  grid-area: bit;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
-  animation: fade-in 0.8s ease 0.2s both;
+  gap: 10px;
 }
 
-.greeting {
-  font-size: var(--text-sm);
-  color: var(--color-text-2);
+.speechBubble {
+  background: rgba(15,23,42,.72);
+  border: 1px solid rgba(168,85,247,.4);
+  border-radius: 16px;
+  padding: 10px 14px;
+  max-width: 250px;
+  min-height: 38px;
+  font: 500 13px/1.45 Inter, sans-serif;
+  color: #e2e8f0;
+  box-shadow: 0 0 22px rgba(168,85,247,.18);
+  min-width: 180px;
 }
-.greeting strong { color: var(--color-accent); }
 
-/* Nav */
-.nav {
+.caret {
+  display: inline-block;
+  width: 6px;
+  height: 13px;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: #a855f7;
+  animation: lvCaret 1s steps(1) infinite;
+  transition: opacity .1s;
+}
+
+.bitWrap {
+  cursor: pointer;
+  transition: transform .4s ease-out;
+  user-select: none;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────────────────── */
+.btns {
+  grid-area: btns;
+  width: 100%;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-  width: 100%;
-  max-width: 320px;
+  gap: 10px;
+  animation: lvUp .6s .15s ease-out both;
 }
 
-.menuBtn {
-  width: 100%;
-  animation: slide-in-up 0.5s ease both;
-}
-
-/* XP */
-.levelBadge {
+.primaryBtn {
+  min-height: 60px;
+  border: 0;
+  border-radius: 30px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  padding: var(--space-2) var(--space-4);
-  animation: fade-in 1s ease 0.5s both;
+  gap: 14px;
+  padding: 0 22px;
+  color: #04121a;
+  background: linear-gradient(100deg, #00d4ff 0 38%, #e0fbff 50%, #00d4ff 62% 100%);
+  background-size: 260% 100%;
+  background-position: 100% 0;
+  transition: background-position .6s cubic-bezier(.2,.8,.2,1), box-shadow .2s;
+  box-shadow: 0 0 20px rgba(0,212,255,.35);
+  width: 100%;
+}
+.primaryBtn:hover {
+  background-position: 0 0;
+  box-shadow: 0 0 32px rgba(0,212,255,.6);
 }
 
-.levelLabel {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: var(--text-sm);
-  color: var(--color-accent);
+.primaryBtnArrow {
+  font: 900 15px Nunito, sans-serif;
+}
+.primaryBtnText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+.primaryBtnLabel {
+  font: 900 17px Nunito, sans-serif;
+}
+.primaryBtnSub {
+  font: 600 11px 'JetBrains Mono', monospace;
+  opacity: .75;
 }
 
-.xpBar {
-  width: 80px;
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.secondaryBtn {
+  min-height: 48px;
+  border-radius: 16px;
+  background: rgba(15,23,42,.62);
+  border: 1px solid rgba(148,163,184,.16);
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  cursor: pointer;
+  font: 800 14px Nunito, sans-serif;
+  transition: border-color .2s, box-shadow .2s;
+}
+.secondaryBtn:hover {
+  border-color: rgba(0,212,255,.6);
+  box-shadow: 0 0 16px rgba(0,212,255,.25);
+}
+
+.secondaryIcon {
+  font: 700 14px 'JetBrains Mono', monospace;
+  color: #00d4ff;
+  width: 16px;
+}
+
+/* ── XP row ───────────────────────────────────────────────────────────────── */
+.xpRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px 0;
+}
+
+.lvBadge {
+  font: 800 12px Nunito, sans-serif;
+  color: #f8fafc;
+  padding: 3px 9px;
+  border-radius: 10px;
+  background: rgba(0,212,255,.15);
+  border: 1px solid rgba(0,212,255,.4);
+  white-space: nowrap;
+}
+
+.xpTrack {
+  flex: 1;
   height: 6px;
-  background: var(--color-bg-3);
-  border-radius: var(--radius-full);
+  border-radius: 3px;
+  background: #1e293b;
   overflow: hidden;
 }
 
 .xpFill {
   height: 100%;
-  background: var(--color-accent);
-  border-radius: var(--radius-full);
-  transition: width var(--transition-base);
+  border-radius: 3px;
+  background: linear-gradient(90deg, #00d4ff, #67e8f9, #00d4ff);
+  background-size: 200% 100%;
+  animation: lvLiquid 2.4s linear infinite;
+  box-shadow: 0 0 10px #00d4ff;
+  transition: width .6s;
 }
 
 .xpLabel {
-  font-size: var(--text-xs);
-  color: var(--color-text-3);
+  font: 500 11px 'JetBrains Mono', monospace;
+  color: #94a3b8;
+  white-space: nowrap;
 }
 
-.tagline {
-  font-size: var(--text-xs);
-  color: var(--color-text-3);
-  letter-spacing: 0.05em;
+/* ── Keyframes (from lv-core.js) ─────────────────────────────────────────── */
+@keyframes lvTwinkle {
+  0%, 100% { opacity: .3; }
+  50% { opacity: 1; }
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .logoText { font-size: var(--text-4xl); }
-  .logoVerse { font-size: var(--text-2xl); }
+@keyframes lvTrace {
+  from { transform: translateX(-80px); }
+  to   { transform: translateX(1400px); }
+}
+
+@keyframes lvCaret {
+  50% { opacity: 0; }
+}
+
+@keyframes lvLiquid {
+  to { background-position: -200% 0; }
+}
+
+@keyframes lvUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
 }

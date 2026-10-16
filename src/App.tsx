@@ -141,11 +141,11 @@ export default function App() {
     <div
       className="app-shell"
       data-world={'worldId' in screen ? screen.worldId : undefined}
-      style={{ position: 'relative', minHeight: '100svh', background: 'var(--color-bg)', overflow: 'hidden' }}
+      style={{ position: 'relative', height: '100svh', background: 'var(--color-bg)', overflow: 'hidden' }}
     >
       {settings.ambientEffects && <Starfield />}
 
-      <main style={{ position: 'relative', zIndex: 1, minHeight: '100svh' }}>
+      <main style={{ position: 'relative', zIndex: 1, height: '100svh' }}>
         <ErrorBoundary key={screen.id}>
           <ScreenView screen={screen} />
         </ErrorBoundary>

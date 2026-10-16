@@ -1,6 +1,39 @@
-.bit { display: block; }
+.wrapper { display: inline-block; }
 
-.animateFloat { animation: float 3s ease-in-out infinite; }
+.float { animation: bitFloat 3.4s ease-in-out infinite; }
+
+@keyframes bitFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes bitBlink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(.08); }
+}
+
+@keyframes bitTalk {
+  0%, 100% { transform: scaleY(.3); }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes bitWave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-40deg); }
+}
+
+@keyframes bitSpark {
+  0% { transform: scale(0) rotate(45deg); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: scale(1.3) rotate(45deg) translateY(-8px); opacity: 0; }
+}
+
+@keyframes lvPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .45; }
+}
+
+.animateFloat { animation: bitFloat 3.4s ease-in-out infinite; }
 
 /* Dialogue */
 .dialogueContainer {
