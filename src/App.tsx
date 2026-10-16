@@ -11,6 +11,10 @@ import { LessonScreen } from '@/features/lesson/LessonScreen'
 import { PuzzleScreen } from '@/features/puzzle/PuzzleScreen'
 import { WorldMapScreen } from '@/features/world/WorldMapScreen'
 import { WorldHubScreen } from '@/features/world/WorldHubScreen'
+import { SettingsScreen } from '@/features/settings/SettingsScreen'
+import { GlossaryScreen } from '@/features/glossary/GlossaryScreen'
+import { AchievementsScreen } from '@/features/achievements/AchievementsScreen'
+import { CreditsScreen } from '@/features/credits/CreditsScreen'
 
 // ── Circuit Lab screen ──
 function CircuitLabScreen() {
@@ -29,23 +33,6 @@ function CircuitLabScreen() {
   )
 }
 
-// ── Lazy placeholders for screens not yet implemented ──
-function Placeholder({ name }: { name: string }) {
-  const navigate = useStore(s => s.navigate)
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: '1rem', fontFamily: 'var(--font-display)', color: 'var(--color-text-2)' }}>
-      <div style={{ fontSize: '3rem' }}>🚧</div>
-      <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{name}</div>
-      <div style={{ fontSize: '0.875rem' }}>Coming soon in Milestone 2</div>
-      <button
-        onClick={() => navigate({ id: 'menu' })}
-        style={{ marginTop: '1rem', padding: '0.5rem 1.5rem', background: 'var(--color-accent)', color: '#fff', border: 'none', borderRadius: 'var(--radius-full)', fontFamily: 'inherit', fontWeight: 700, cursor: 'pointer' }}
-      >
-        ← Back to Menu
-      </button>
-    </div>
-  )
-}
 
 function ScreenView({ screen }: { screen: Screen }) {
   const navigate = useStore(s => s.navigate)
@@ -78,10 +65,10 @@ function ScreenView({ screen }: { screen: Screen }) {
       />
     )
     case 'circuit-lab':return <CircuitLabScreen />
-    case 'achievements':return <Placeholder name="Achievements" />
-    case 'glossary':   return <Placeholder name="Glossary" />
-    case 'settings':   return <Placeholder name="Settings" />
-    case 'credits':    return <Placeholder name="Credits" />
+    case 'achievements':return <AchievementsScreen onBack={() => navigate({ id: 'menu' })} />
+    case 'glossary':   return <GlossaryScreen onBack={() => navigate({ id: 'menu' })} initialTermId={screen.termId} />
+    case 'settings':   return <SettingsScreen onBack={() => navigate({ id: 'menu' })} />
+    case 'credits':    return <CreditsScreen onBack={() => navigate({ id: 'menu' })} />
     default:           return <MainMenu />
   }
 }

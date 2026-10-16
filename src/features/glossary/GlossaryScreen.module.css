@@ -1,0 +1,170 @@
+.root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.backBtn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-2);
+  padding: var(--space-1) var(--space-3);
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  transition: color 0.15s, border-color 0.15s;
+}
+.backBtn:hover { color: var(--color-text); border-color: var(--color-text-2); }
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: var(--color-text-heading);
+  margin: 0;
+}
+
+/* ── Search ── */
+.searchBar {
+  padding: var(--space-3) var(--space-4) 0;
+}
+.searchInput {
+  width: 100%;
+  background: var(--color-bg-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-3);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.searchInput:focus { border-color: var(--color-accent); }
+
+/* ── Tags ── */
+.tags {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  padding: var(--space-2) var(--space-4);
+}
+.tagBtn {
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-2);
+  color: var(--color-text-2);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tagBtn[data-active="true"] {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+.tagBtn:hover:not([data-active="true"]) { border-color: var(--color-accent); color: var(--color-accent); }
+
+/* ── List ── */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) var(--space-4) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+
+.empty {
+  color: var(--color-text-3);
+  font-size: var(--text-sm);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+/* ── Term Row ── */
+.termRow {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 2px var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-bg-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s;
+}
+.termRow:hover, .termRow[data-open="true"] { border-color: var(--color-accent); }
+
+.termMain {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  grid-column: 1;
+  grid-row: 1;
+}
+.termName {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+.termSymbol {
+  font-size: var(--text-lg);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+.termShort {
+  font-size: var(--text-xs);
+  color: var(--color-text-2);
+  grid-column: 1;
+  grid-row: 2;
+  line-height: 1.4;
+}
+
+.chevron {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  font-size: 0.6rem;
+  color: var(--color-text-3);
+}
+
+/* ── Detail ── */
+.termDetail {
+  padding: var(--space-3);
+  background: color-mix(in oklch, var(--color-accent) 5%, var(--color-bg-2));
+  border: 1px solid var(--color-accent);
+  border-top: none;
+  border-radius: 0 0 var(--radius-base) var(--radius-base);
+  font-size: var(--text-sm);
+  color: var(--color-text-2);
+  line-height: 1.6;
+}
+
+@media (max-width: 480px) {
+  .list { padding: var(--space-2) var(--space-3) var(--space-6); }
+  .searchBar { padding: var(--space-2) var(--space-3) 0; }
+  .tags { padding: var(--space-2) var(--space-3); }
+}
