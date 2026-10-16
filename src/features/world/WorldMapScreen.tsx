@@ -49,14 +49,12 @@ export function WorldMapScreen() {
   const repaired = WORLDS.filter((_, i) => isWorldUnlocked(WORLDS[i]?.id ?? '')).length
 
   useEffect(() => {
-    const L = lva()
-    const setup = (l: typeof L) => {
-      if (!l) return
+    const setup = (l: NonNullable<ReturnType<typeof lva>>) => {
       l.enter('map')
       setMuted(l.muted)
-      const unsub = l.sub(() => setMuted(l.muted))
-      return unsub
+      return l.sub(() => setMuted(l.muted))
     }
+    const L = lva()
     if (L) return setup(L)
     const t = setInterval(() => {
       if (window.LVA) { clearInterval(t); setup(window.LVA) }
@@ -262,11 +260,10 @@ export function WorldMapScreen() {
       {/* Mute button */}
       <button
         className={styles.muteBtn}
-        onClick={() => { lva()?.toggleMute(); setMuted(v => !v) }}
-        aria-label="Toggle sound"
-        style={{ textDecoration: muted ? 'line-through' : 'none', opacity: muted ? .55 : 1 }}
+        onClick={() => { lva()?.toggleMute() }}
+        aria-label={muted ? 'Unmute music' : 'Mute music'}
       >
-        ♪
+        {muted ? '🔇' : '🔊'}
       </button>
 
       {/* Toast */}

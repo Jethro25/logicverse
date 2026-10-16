@@ -29,7 +29,19 @@ export function MainMenu() {
   const [mood, setMood]       = useState<'excited' | 'happy'>('excited')
   const [lineIdx, setLineIdx] = useState(0)
   const [muted, setMuted]     = useState(false)
+  const [audioReady, setAudioReady] = useState(false)
   const stopTyper = useRef<(() => void) | null>(null)
+
+  const startAudio = useCallback((L: NonNullable<ReturnType<typeof lva>>) => {
+    if (!L.ctx) {
+      L.init()
+      L.play('menu')
+    } else {
+      L.enter('menu')
+    }
+    setAudioReady(true)
+    setMuted(L.muted)
+  }, [])
 
   const speak = useCallback((idx: number) => {
     const L = lva()
@@ -47,25 +59,23 @@ export function MainMenu() {
   }, [hasSave, mood])
 
   useEffect(() => {
-    const L = lva()
-    if (!L) {
-      // Wait for LVA to be available (loaded via script tag)
-      const t = setInterval(() => {
-        if (window.LVA) {
-          clearInterval(t)
-          window.LVA.enter('menu')
-          setMuted(window.LVA.muted)
-          speak(0)
-        }
-      }, 80)
-      return () => clearInterval(t)
+    const setup = (L: NonNullable<ReturnType<typeof lva>>) => {
+      // Try to auto-start audio (works if browser allows autoplay)
+      try { startAudio(L) } catch (_) { /* blocked by autoplay policy */ }
+      speak(0)
+      const unsub = L.sub(() => setMuted(L.muted))
+      return () => { unsub(); stopTyper.current?.() }
     }
-    L.enter('menu')
-    setMuted(L.muted)
-    speak(0)
-    const unsub = L.sub(() => setMuted(L.muted))
-    return () => { unsub(); stopTyper.current?.() }
-  }, [speak])
+
+    const L = lva()
+    if (L) return setup(L)
+
+    // lv-core.js loads deferred — poll until available
+    const t = setInterval(() => {
+      if (window.LVA) { clearInterval(t); setup(window.LVA) }
+    }, 80)
+    return () => clearInterval(t)
+  }, [speak, startAudio])
 
   const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
     const L = lva()
@@ -75,15 +85,30 @@ export function MainMenu() {
     containerRef.current.style.setProperty('--py', ((e.clientY - r.top) / r.height - 0.5).toFixed(3))
   }
 
-  const toggleMute = () => {
-    lva()?.toggleMute()
-    setMuted(v => !v)
+  // Ensure audio starts on first user interaction with anything in the menu
+  const ensureAudio = () => {
+    const L = lva()
+    if (!L || audioReady) return
+    startAudio(L)
   }
 
-  const hov = () => lva()?.S.hover()
-  const click = () => lva()?.S.click()
+  const toggleMute = () => {
+    const L = lva()
+    if (!L) return
+    if (!L.ctx) {
+      // First interaction — start audio, leave unmuted
+      startAudio(L)
+      return
+    }
+    L.toggleMute()
+    // State syncs via subscription
+  }
+
+  const hov = () => { ensureAudio(); lva()?.S.hover() }
+  const click = () => { ensureAudio(); lva()?.S.click() }
   const poke = () => {
-    click()
+    ensureAudio()
+    lva()?.S.click()
     speak(lineIdx + 1)
     setMood(m => m === 'excited' ? 'happy' : 'excited')
   }
@@ -125,10 +150,10 @@ export function MainMenu() {
       <button
         className={styles.muteBtn}
         onClick={toggleMute}
-        aria-label="Toggle sound"
-        style={{ textDecoration: muted ? 'line-through' : 'none', opacity: muted ? 0.55 : 1 }}
+        aria-label={muted ? 'Unmute music' : 'Mute music'}
+        title={muted ? 'Unmute' : 'Mute'}
       >
-        ♪
+        {muted ? '🔇' : '🔊'}
       </button>
 
       {/* Main layout */}
@@ -157,7 +182,7 @@ export function MainMenu() {
             onClick={poke}
             style={{ transform: 'translate(calc(var(--px,0) * -12px),calc(var(--py,0) * -8px))' }}
           >
-            <Bit mood={mood} size={110} talking={talking} wave={!hasSave} follow />
+            <Bit mood={mood} size={90} talking={talking} wave={!hasSave} follow />
           </div>
         </div>
 
