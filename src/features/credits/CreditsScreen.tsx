@@ -22,9 +22,9 @@ export function CreditsScreen({ onBack }: Props) {
         <section className={styles.section}>
           <h3 className={styles.sectionTitle}>About</h3>
           <p className={styles.body}>
-            An educational puzzle-adventure game designed to teach <strong>Logic Circuits &amp; Design (CPE 10)</strong> to
-            BS Computer Engineering students. Play through 10 worlds covering the full midterm and finals syllabus —
-            from digital signals and logic gates to Karnaugh maps, flip-flops, and state machines.
+            An educational puzzle-adventure game designed to teach <strong>Logic Circuits</strong>. Play through 10 worlds
+            covering the full midterm and finals syllabus — from digital signals and logic gates to Karnaugh maps,
+            flip-flops, and state machines.
           </p>
         </section>
 
@@ -32,11 +32,7 @@ export function CreditsScreen({ onBack }: Props) {
           <h3 className={styles.sectionTitle}>Development</h3>
           <div className={styles.creditRow}>
             <span className={styles.creditRole}>Game Design &amp; Content</span>
-            <span className={styles.creditName}>Jethro</span>
-          </div>
-          <div className={styles.creditRow}>
-            <span className={styles.creditRole}>Engineering &amp; Implementation</span>
-            <span className={styles.creditName}>Claude Sonnet (Anthropic)</span>
+            <span className={styles.creditName}>Jethro Lualhati</span>
           </div>
         </section>
 
