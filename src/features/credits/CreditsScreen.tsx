@@ -64,7 +64,7 @@ export function CreditsScreen({ onBack }: Props) {
         </section>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Built with ❤ for curious minds everywhere.</p>
+          <p className={styles.footerText}>Built for curious minds everywhere.</p>
           <p className={styles.footerText}>LOGICVERSE v1.0 · 2026</p>
         </div>
       </div>
