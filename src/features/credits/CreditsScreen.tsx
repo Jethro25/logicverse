@@ -55,16 +55,16 @@ export function CreditsScreen({ onBack }: Props) {
         </section>
 
         <section className={styles.section}>
-          <h3 className={styles.sectionTitle}>Course Reference</h3>
+          <h3 className={styles.sectionTitle}>What You'll Learn</h3>
           <p className={styles.body}>
-            Curriculum based on the CPE 10 Logic Circuits &amp; Design syllabus covering:
-            digital number systems, Boolean algebra, logic gates, combinational circuits,
-            K-map minimization, MSI components, and sequential logic.
+            Covers the fundamentals of digital logic: number systems, Boolean algebra,
+            logic gates, combinational circuits, K-map minimization, MSI components,
+            and sequential logic — from the ground up.
           </p>
         </section>
 
         <div className={styles.footer}>
-          <p className={styles.footerText}>Built with ❤ for CPE students everywhere.</p>
+          <p className={styles.footerText}>Built with ❤ for curious minds everywhere.</p>
           <p className={styles.footerText}>LOGICVERSE v1.0 · 2026</p>
         </div>
       </div>

@@ -178,7 +178,7 @@ export function SettingsScreen({ onBack }: Props) {
           )}
         </section>
 
-        <p className={styles.version}>LOGICVERSE v1.0 · CPE 10 Logic Circuits &amp; Design</p>
+        <p className={styles.version}>LOGICVERSE v1.0 · Logic Circuits &amp; Digital Design</p>
       </div>
     </div>
   )
